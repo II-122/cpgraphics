@@ -13,5 +13,5 @@ mapAssets > Scripts 폴더에 있는 cameratest.cs 관련 파일은 구현된 �
 3. unity를 실행 후 Project > Assets에 있는 'test' 더블 클릭 (덮어쓰기를 묻는 안내창이 나오면 확인 클릭)
  작업하는데 roof 가 불편하시면 Hierarchy에서 unvisible 하시면 됩니다.
 
-수정 요청 사항이 있으시면 
+수정 요청 사항이 있으시면 바로 말씀해주세요.
 혹시 작동이 안되거나 오류가 있다면 카톡으로 바로 알려주세요!
