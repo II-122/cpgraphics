@@ -7,10 +7,8 @@ public class PlayerMove : MonoBehaviour
     public float speed;
     float hAxis;
     float vAxis;
-    bool wDown;
     Vector3 moveVec;
 
-    Animator anim;
 
 
     // Update is called once per frame
@@ -18,14 +16,12 @@ public class PlayerMove : MonoBehaviour
     {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-        //wDown = Input.GetButton("Walk");
 
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-        //transform.position += moveVec * speed * (wDown ? 0.3f : 1.5f) * Time.deltaTime;
         transform.position += moveVec * speed * Time.deltaTime;
 
 
 
-        transform.LookAt(transform.position + moveVec); //ÀÌÈÄ ¸¶¿ì½º¿¡ µû¶ó ½ÃÁ¡ º¯°æ
+        transform.LookAt(transform.position + moveVec); //ì´í›„ ë§ˆìš°ìŠ¤ì— ë”°ë¼ ì‹œì  ë³€ê²½
     }
 }
