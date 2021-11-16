@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject[] items;
+    public bool[] hasitem;
+
     [SerializeField]
     private float walkSpeed;
 
@@ -21,7 +24,8 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody myRigid;
 
-
+    bool iDown;
+    GameObject nearObject;
 
     private void Start()
     {
@@ -36,6 +40,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
+        Interation();
     }
 
     private void Move()
@@ -67,5 +72,40 @@ public class PlayerMove : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+    }
+
+    /*void GetInput()
+    {
+        //Debug.Log(iDown);
+    }*/
+
+    void Interation()
+    {
+        iDown = Input.GetButtonDown("Interation");
+        if (iDown && nearObject != null) //근처에 물체가 있고, interation키를 누르면('z') 아이템 획득
+        {
+            //Debug.Log("interation");
+
+            if (nearObject.tag == "Item") //nearObject가 item일때 
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int itemIndex = item.value;
+                hasitem[itemIndex] = true;
+
+                Destroy(nearObject);
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other) //충돌처리
+    {
+        if (other.tag == "Item")
+            nearObject = other.gameObject; //아이템과 충돌하면 nearObject 세팅
+
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Item")
+            nearObject = null;
     }
 }
