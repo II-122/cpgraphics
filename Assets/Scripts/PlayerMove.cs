@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public GameObject[] items;
+    public GameObject[] items; //갖고있는 아이템 리스트
     public bool[] hasitem;
 
     [SerializeField]
-    private float walkSpeed;
+    private float walkSpeed; //플레이어 이동 속도
 
     [SerializeField]
-    private float lookSensitivity;
+    private float lookSensitivity; //마우스 화면 전환 감도
 
 
     [SerializeField]
-    private float cameraRotationLimit;
+    private float cameraRotationLimit; //마우스 화면 전환 범위
     private float currentCameraRotationX = 0;
 
 
@@ -43,6 +43,8 @@ public class PlayerMove : MonoBehaviour
         Interation();
     }
 
+
+    //플레이어 이동 함수
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -74,15 +76,11 @@ public class PlayerMove : MonoBehaviour
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
 
-    /*void GetInput()
-    {
-        //Debug.Log(iDown);
-    }*/
 
     void Interation()
     {
         iDown = Input.GetButtonDown("Interation");
-        if (iDown && nearObject != null) //근처에 물체가 있고, interation키를 누르면('z') 아이템 획득
+        if (iDown && nearObject != null) //근처에 물체가 있고, interation키('z')를 누르면 아이템 획득
         {
             //Debug.Log("interation");
 

@@ -12,4 +12,15 @@ public class Item : MonoBehaviour
     {
         transform.Rotate(Vector3.up * 40 * Time.deltaTime);
     }
+
+    private void Start()
+    {
+        item_spawn();
+    }
+
+    public void item_spawn()
+    {
+        Vector3 item_location = new Vector3(2f, 3f, -225f); //추후 random, 3f, random으로 변경 random값은 -225 + (0~9)*50 혹은 스폰지역을 정해두고 하자
+        transform.position = item_location;
+    }
 }
