@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\MonsterAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
