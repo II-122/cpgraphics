@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]
-    private float walkSpeed;
+    public GameObject[] items; //갖고있는 아이템 리스트
+    public bool[] hasitem;
 
     [SerializeField]
-    private float lookSensitivity;
+    private float walkSpeed; //플레이어 이동 속도
+
+    [SerializeField]
+    private float lookSensitivity; //마우스 화면 전환 감도
 
 
     [SerializeField]
-    private float cameraRotationLimit;
+    private float cameraRotationLimit; //마우스 화면 전환 범위
     private float currentCameraRotationX = 0;
 
 
@@ -21,7 +24,8 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody myRigid;
 
-
+    bool iDown;
+    GameObject nearObject;
 
     private void Start()
     {
@@ -36,8 +40,11 @@ public class PlayerMove : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
+        Interation();
     }
 
+
+    //플레이어 이동 함수
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -67,5 +74,36 @@ public class PlayerMove : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+    }
+
+
+    void Interation()
+    {
+        iDown = Input.GetButtonDown("Interation");
+        if (iDown && nearObject != null) //근처에 물체가 있고, interation키('z')를 누르면 아이템 획득
+        {
+            //Debug.Log("interation");
+
+            if (nearObject.tag == "Item") //nearObject가 item일때 
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int itemIndex = item.value;
+                hasitem[itemIndex] = true;
+
+                Destroy(nearObject);
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other) //충돌처리
+    {
+        if (other.tag == "Item")
+            nearObject = other.gameObject; //아이템과 충돌하면 nearObject 세팅
+
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Item")
+            nearObject = null;
     }
 }
