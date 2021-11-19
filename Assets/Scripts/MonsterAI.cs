@@ -41,13 +41,13 @@ public class MonsterAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // Check for sight and attach range ( Collider 있어야만 작동 : Player 에 Collide 지우면 안돼요)
+        // Check for sight and attach range ( Collider 있어야만 작동 : Player 에 Collide 지우면 안돼요 )
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        //if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
     }
     private void Patroling()
@@ -59,7 +59,7 @@ public class MonsterAI : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         // Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
+        if (distanceToWalkPoint.magnitude < 0.1f)
             walkPointSet = false;
     }
 
@@ -72,31 +72,32 @@ public class MonsterAI : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         // check with raycast if random point is on the ground
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 30f, whatIsGround))
             walkPointSet = true;
     }
 
     private void ChasePlayer()
     {
+        agent.speed *= 2;
         agent.SetDestination(player.position);
     }
-    private void AttackPlayer()
-    {
-        // Make sure monster doesn't move
-        agent.SetDestination(transform.position);
+    //private void AttackPlayer()
+    //{
+    //    // Make sure monster doesn't move
+    //    agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+    //    transform.LookAt(player);
         
-        if(!alreadyAttacked)
-        {
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
+    //    if(!alreadyAttacked)
+    //    {
+    //        alreadyAttacked = true;
+    //        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+    //    }
+    //}
 
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
+    //private void ResetAttack()
+    //{
+    //    alreadyAttacked = false;
+    //}
 
 }
