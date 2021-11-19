@@ -8,9 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{51A9779E-4CDD-27B8-F65E-8FD5E5B3559C}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{ACDF6F6A-757A-159B-FD49-67BD9E3E6E9D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -667,11 +666,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{EBF4BA47-3947-9C5F-7E06-BA738B1E3365}</Project>
+      <Project>{23967C20-00E1-B49E-9C95-109A0BBA4BA4}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{26193EBB-EE12-981B-FF52-42AF8357A47D}</Project>
+      <Project>{078F020E-F5AE-26E7-9A52-DDBBA4916D5D}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>

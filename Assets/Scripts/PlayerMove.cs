@@ -25,11 +25,11 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody myRigid;
 
     bool iDown;
+    bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject;
 
     private void Start()
     {
-
         myRigid = GetComponent<Rigidbody>();
     }
 
@@ -43,19 +43,30 @@ public class PlayerMove : MonoBehaviour
         Interation();
     }
 
+    void FixedUpdate()
+    {
+        collisionWall();
+    }
 
+    private void collisionWall()
+    {
+        isBorder_front = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("wall"));
+        isBorder_back = Physics.Raycast(transform.position, -transform.forward, 5, LayerMask.GetMask("wall"));
+        isBorder_left = Physics.Raycast(transform.position, -transform.right, 5, LayerMask.GetMask("wall"));
+        isBorder_right = Physics.Raycast(transform.position, transform.right, 5, LayerMask.GetMask("wall"));
+    }
     //플레이어 이동 함수
     private void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
-
+  
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed; //대각선 이동속도도 동일하게 맞춰주기 위해 normalized를 통해 정규화
 
-        myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        if ((!isBorder_front)&&(!isBorder_back)&&(!isBorder_left)&&(!isBorder_right)) { myRigid.MovePosition(transform.position + _velocity * Time.deltaTime); }
 
     }
 
@@ -75,7 +86,6 @@ public class PlayerMove : MonoBehaviour
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
-
 
     void Interation()
     {
@@ -105,5 +115,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.tag == "Item")
             nearObject = null;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("충돌 감지");
     }
 }

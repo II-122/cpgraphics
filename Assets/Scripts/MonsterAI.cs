@@ -31,6 +31,8 @@ public class MonsterAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    bool isBorder;
+
     // Start is called before the first frame update
     public void Awake()
     {
@@ -50,6 +52,12 @@ public class MonsterAI : MonoBehaviour
         //if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
     }
+
+    private void FixedUpdate()
+    {
+        CollisionWall();
+    }
+
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
@@ -69,17 +77,25 @@ public class MonsterAI : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        if (!isBorder)  // 벽 충돌 아닌 경우만 이동
+        {
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        }
 
         // check with raycast if random point is on the ground
-        if (Physics.Raycast(walkPoint, -transform.up, 30f, whatIsGround))
-            walkPointSet = true;
+        if (Physics.Raycast(walkPoint, -transform.up, 65, whatIsGround)) { walkPointSet = true;  }
+
     }
 
     private void ChasePlayer()
     {
         agent.speed *= 2;
         agent.SetDestination(player.position);
+    }
+
+    private void CollisionWall()
+    {
+        isBorder = Physics.Raycast(transform.position, transform.forward, 2, LayerMask.GetMask("wall"));
     }
     //private void AttackPlayer()
     //{
