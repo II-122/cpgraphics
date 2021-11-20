@@ -24,6 +24,8 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody myRigid;
 
+    private float backstapLength = 3.0f;
+
     bool iDown;
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject;
@@ -45,15 +47,16 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        collisionWall();
+        CollisionWall();
     }
 
-    private void collisionWall()
+    private void CollisionWall()
     {
-        isBorder_front = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("wall"));
-        isBorder_back = Physics.Raycast(transform.position, -transform.forward, 5, LayerMask.GetMask("wall"));
-        isBorder_left = Physics.Raycast(transform.position, -transform.right, 5, LayerMask.GetMask("wall"));
-        isBorder_right = Physics.Raycast(transform.position, transform.right, 5, LayerMask.GetMask("wall"));
+        
+        isBorder_front = Physics.Raycast(transform.position, transform.forward, backstapLength, LayerMask.GetMask("wall"));
+        isBorder_back = Physics.Raycast(transform.position, -transform.forward, backstapLength, LayerMask.GetMask("wall"));
+        isBorder_left = Physics.Raycast(transform.position, -transform.right, backstapLength, LayerMask.GetMask("wall"));
+        isBorder_right = Physics.Raycast(transform.position, transform.right, backstapLength, LayerMask.GetMask("wall"));
     }
     //플레이어 이동 함수
     private void Move()
