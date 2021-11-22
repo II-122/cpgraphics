@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{ACDF6F6A-757A-159B-FD49-67BD9E3E6E9D}</ProjectGuid>
+    <ProjectGuid>{51A9779E-4CDD-27B8-F65E-8FD5E5B3559C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,10 +54,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MonsterAI.cs" />
+    <Compile Include="Assets\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\QuarterView 3D Action BE5\ReadMe\Scripts\ReadmeBE5.cs" />
     <Compile Include="Assets\Scripts\Patrol.cs" />
+    <Compile Include="Assets\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -666,11 +668,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{23967C20-00E1-B49E-9C95-109A0BBA4BA4}</Project>
+      <Project>{1D2E9E4A-9D4F-6C90-3F8C-3090561C7B84}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{078F020E-F5AE-26E7-9A52-DDBBA4916D5D}</Project>
+      <Project>{3CD94375-48C7-018C-AD5A-E4AC0CF33481}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>

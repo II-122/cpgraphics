@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F162FA0B-EE0F-8F18-57D8-5A97E13252D5}</ProjectGuid>
+    <ProjectGuid>{2AC7361A-591B-651C-3465-D3F50FBBE474}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -283,6 +283,9 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.22f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.13.5\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
@@ -692,15 +695,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{ACDF6F6A-757A-159B-FD49-67BD9E3E6E9D}</Project>
+      <Project>{51A9779E-4CDD-27B8-F65E-8FD5E5B3559C}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{23967C20-00E1-B49E-9C95-109A0BBA4BA4}</Project>
+      <Project>{1D2E9E4A-9D4F-6C90-3F8C-3090561C7B84}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{078F020E-F5AE-26E7-9A52-DDBBA4916D5D}</Project>
+      <Project>{3CD94375-48C7-018C-AD5A-E4AC0CF33481}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>
