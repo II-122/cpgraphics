@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+
     public GameObject[] items; //갖고있는 아이템 리스트
     public bool[] hasitem;
 

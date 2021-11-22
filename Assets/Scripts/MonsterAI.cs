@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 /*
@@ -9,6 +11,8 @@ using UnityEngine.AI;
 
 public class MonsterAI : MonoBehaviour
 {
+    public float lookRadius = 10f;
+
     public NavMeshAgent agent;
     public Transform player;
 
@@ -16,107 +20,15 @@ public class MonsterAI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = player.position;
     }
 
-    //public LayerMask whatIsGround, whatIsPlayer;
-
-    //// Patroling 
-    //public Vector3 walkPoint;
-    //bool walkPointSet;
-    //public float walkPointRange;
-
-    //// Attacking 
-    //public float timeBetweenAttacks;
-    //bool alreadyAttacked;
-
-    //// States
-    //public float sightRange, attackRange;
-    //public bool playerInSightRange, playerInAttackRange;
-
-    //bool isBorder;
-
-    //// Start is called before the first frame update
-    //public void Awake()
-    //{
-    //    player = GameObject.Find("Player").transform;
-    //    agent = GetComponent<NavMeshAgent>();
-    //}
-
-    //// Update is called once per frame
-    //private void Update()
-    //{
-    //    // Check for sight and attach range ( Collider 있어야만 작동 : Player 에 Collide 지우면 안돼요 )
-    //    playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-    //    playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-    //    if (!playerInSightRange && !playerInAttackRange) Patroling();
-    //    if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-    //    //if (playerInSightRange && playerInAttackRange) AttackPlayer();
-
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    CollisionWall();
-    //}
-
-    //private void Patroling()
-    //{
-    //    if (!walkPointSet) SearchWalkPoint();
-    //    if (walkPointSet)
-    //        agent.SetDestination(walkPoint);
-
-    //    Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-    //    // Walkpoint reached
-    //    if (distanceToWalkPoint.magnitude < 0.1f)
-    //        walkPointSet = false;
-    //}
-
-    //private void SearchWalkPoint()
-    //{
-    //    // Calculate random point in range
-    //    float randomZ = Random.Range(-walkPointRange, walkPointRange);
-    //    float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-    //    if (!isBorder)  // 벽 충돌 아닌 경우만 이동
-    //    {
-    //        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-    //    }
-
-    //    // check with raycast if random point is on the ground
-    //    if (Physics.Raycast(walkPoint, -transform.up, 65, whatIsGround)) { walkPointSet = true;  }
-
-    //}
-
-    //private void ChasePlayer()
-    //{
-    //    agent.speed *= 2;
-    //    agent.SetDestination(player.position);
-    //}
-
-    //private void CollisionWall()
-    //{
-    //    isBorder = Physics.Raycast(transform.position, transform.forward, 2, LayerMask.GetMask("wall"));
-    //}
-    //private void AttackPlayer()
-    //{
-    //    // Make sure monster doesn't move
-    //    agent.SetDestination(transform.position);
-
-    //    transform.LookAt(player);
-
-    //    if(!alreadyAttacked)
-    //    {
-    //        alreadyAttacked = true;
-    //        Invoke(nameof(ResetAttack), timeBetweenAttacks);
-    //    }
-    //}
-
-    //private void ResetAttack()
-    //{
-    //    alreadyAttacked = false;
-    //}
+    private void Update()
+    {
+        float distance = Vector3.Distance(player.position, transform.position);
+        //if(distance <= lookRadius)
+        //{
+            agent.SetDestination(player.transform.position);
+        //}
+    }
 
 }
