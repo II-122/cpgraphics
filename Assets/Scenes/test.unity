@@ -7646,7 +7646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4606225630210027850, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: m_Constraints
-      value: 94
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 4606225630210027855, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: type
@@ -7731,7 +7731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4703579642283377517, guid: 54405e88078f2304fb086b774bed9365, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703579643391292457, guid: 54405e88078f2304fb086b774bed9365, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54405e88078f2304fb086b774bed9365, type: 3}
@@ -7742,6 +7746,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1617826490}
     m_Modifications:
+    - target: {fileID: 8398905165019841159, guid: ed8e6235474de99488f5f3c6925bbe4a, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 8398905166119231808, guid: ed8e6235474de99488f5f3c6925bbe4a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7789,6 +7797,10 @@ PrefabInstance:
     - target: {fileID: 8398905166119402848, guid: ed8e6235474de99488f5f3c6925bbe4a, type: 3}
       propertyPath: m_Name
       value: Spray
+      objectReference: {fileID: 0}
+    - target: {fileID: 8398905166119402848, guid: ed8e6235474de99488f5f3c6925bbe4a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed8e6235474de99488f5f3c6925bbe4a, type: 3}
