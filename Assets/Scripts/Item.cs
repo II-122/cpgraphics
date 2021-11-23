@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum Type { Ammo, Coin, Grenade, Heart, Weapon};
+    public enum Type { Potion, Key, Web, Heart, Spray};
     public Type type;
     public int value;
 
@@ -20,7 +20,11 @@ public class Item : MonoBehaviour
 
     public void item_spawn()
     {
-        Vector3 item_location = new Vector3(2f, 50f, -225f); //추후 random, 3f, random으로 변경 random값은 -225 + (0~9)*50 혹은 스폰지역을 정해두고 하자
+        Vector3 item_location;
+        if (type == Type.Heart)
+            item_location = new Vector3(2f, 25f, -225f); //추후 random, 3f, random으로 변경 random값은 -225 + (0~9)*50 혹은 스폰지역을 정해두고 하자
+        else
+            item_location = new Vector3(-8f, 25f, -225f); //추후 random, 3f, random으로 변경 random값은 -225 + (0~9)*50 혹은 스폰지역을 정해두고 하자
         transform.position = item_location;
     }
 }
