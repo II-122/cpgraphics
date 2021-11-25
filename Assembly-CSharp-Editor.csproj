@@ -53,7 +53,7 @@
     <UnityVersion>2020.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\QuarterView 3D Action BE5\ReadMe\Scripts\Editor\ReadmeEditorBE5.cs" />
+    <Compile Include="Assets\item_asset\QuarterView 3D Action BE5\ReadMe\Scripts\Editor\ReadmeEditorBE5.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
