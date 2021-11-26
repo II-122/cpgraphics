@@ -9,7 +9,8 @@ public class PlayerMove : MonoBehaviour
     public bool[] hasitem;
 
     [SerializeField]
-    private float walkSpeed; //플레이어 이동 속도
+    private float walkSpeed;
+    public float sprintingMultiplier; //플레이어 이동 속도
 
     [SerializeField]
     private float lookSensitivity; //마우스 화면 전환 감도
@@ -28,8 +29,10 @@ public class PlayerMove : MonoBehaviour
     private float backstapLength = 3.0f;
 
     bool iDown;
+    bool rDown;
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject;
+
 
     private void Start()
     {
@@ -67,8 +70,30 @@ public class PlayerMove : MonoBehaviour
   
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;
+        rDown = Input.GetButton("Sprint");
+        bool rUp = Input.GetButtonUp("Sprint");
 
-        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed; //대각선 이동속도도 동일하게 맞춰주기 위해 normalized를 통해 정규화
+        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
+        if (_velocity != Vector3.zero)
+        {
+            GetComponent<AudioSource>().UnPause();
+        }
+        else
+        {
+            GetComponent<AudioSource>().Pause();
+            GetComponent<AudioSource>().pitch = 1.0f;
+        }
+
+        if(rDown)
+        {
+            _velocity *= sprintingMultiplier;       // 왼쪽 Shift 누르면 달리기
+            GetComponent<AudioSource>().pitch = 1.5f;
+        }
+
+        if(rUp)
+        {
+            GetComponent<AudioSource>().pitch = 1.0f;
+        }
 
         if ((!isBorder_front)&&(!isBorder_back)&&(!isBorder_left)&&(!isBorder_right)) { myRigid.MovePosition(transform.position + _velocity * Time.deltaTime); }
 
