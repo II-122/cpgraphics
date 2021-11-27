@@ -54,7 +54,8 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\item_asset\QuarterView 3D Action BE5\ReadMe\Scripts\ReadmeBE5.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
-     <Compile Include="Assets\PauseMenu.cs" />
+     <Compile Include="Assets\Scripts\ModeMenu.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <None Include="Assets\item_asset\Models\Key\readME keys.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
