@@ -39,6 +39,6 @@ public class GameManager : MonoBehaviour
         SprayNum.text = "X" + player.hasitem[2];
         WebNum.text = "X" + player.hasitem[3];
 
-        staminaBar.localScale = new Vector3((float)((float)(player.hasitem[4])) / (float)2000, 1, 1);
+        staminaBar.localScale = new Vector3((float)((float)(player.hasitem[4])) / (float)1000, 1, 1);
     }
 }

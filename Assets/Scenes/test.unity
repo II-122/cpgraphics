@@ -2108,7 +2108,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X 1
+  m_Text: X 0
 --- !u!222 &121223320
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5319,7 +5319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  value: 0
+  value: 4
 --- !u!135 &278369078
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11463,7 +11463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa6abb1e2e87b14583ab68ba84dfd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectDistance: 700
+  detectDistance: 70
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 50
   player: {fileID: 2064440085}
@@ -23251,7 +23251,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 / 3
+  m_Text: 0 / 5
 --- !u!222 &1316246639
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25411,7 +25411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  value: 0
+  value: 2
 --- !u!135 &1479246032
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -25570,7 +25570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  value: 0
+  value: 3
 --- !u!135 &1499522131
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -28310,7 +28310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  value: 0
+  value: 1
 --- !u!135 &1678194385
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -31421,7 +31421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00:00
+  m_Text: 05:00
 --- !u!222 &1860985552
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35074,7 +35074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  hasitem: 0000000000000000000000000000000029000000
+  hasitem: 0000000000000000000000000000000000000000
   walkSpeed: 70
   sprintingMultiplier: 2
   lookSensitivity: 2
@@ -35473,7 +35473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2100950095
 BoxCollider:
   m_ObjectHideFlags: 0

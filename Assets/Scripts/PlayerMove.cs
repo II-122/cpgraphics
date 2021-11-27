@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         hasitem[1] = 0;
         hasitem[2] = 0;
         hasitem[3] = 0;
-        hasitem[4] = 2000;
+        hasitem[4] = 1000;
         myRigid = GetComponent<Rigidbody>();
     }
 
@@ -139,9 +139,9 @@ public class PlayerMove : MonoBehaviour
                 int itemIndex = item.value;
                 if (itemIndex == 4)
                 {
-                    hasitem[itemIndex] += 1600;
-                    if (hasitem[itemIndex] > 2000)
-                        hasitem[itemIndex] = 2000;
+                    hasitem[itemIndex] += 800;
+                    if (hasitem[itemIndex] > 1000)
+                        hasitem[itemIndex] = 1000;
                 }
 
                 else
