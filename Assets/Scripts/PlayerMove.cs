@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
 
     public GameObject[] items; //갖고있는 아이템 리스트
-    public bool[] hasitem;
+    public int[] hasitem;
 
     [SerializeField]
     private float walkSpeed;
@@ -29,6 +29,9 @@ public class PlayerMove : MonoBehaviour
     private float backstapLength = 3.0f;
 
     bool iDown;
+    bool item1;
+    bool item2;
+    bool item3;
     bool rDown;
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject;
@@ -36,6 +39,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        hasitem[0] = 0;
+        hasitem[1] = 0;
+        hasitem[2] = 0;
+        hasitem[3] = 0;
+        hasitem[4] = 2000;
         myRigid = GetComponent<Rigidbody>();
     }
 
@@ -47,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         CameraRotation();
         CharacterRotation();
         Interation();
+        use_item();
     }
 
     void FixedUpdate()
@@ -84,8 +93,9 @@ public class PlayerMove : MonoBehaviour
             GetComponent<AudioSource>().pitch = 1.0f;
         }
 
-        if(rDown)
+        if (rDown && hasitem[4] > 0)
         {
+            hasitem[4] -= 1;
             _velocity *= sprintingMultiplier;       // 왼쪽 Shift 누르면 달리기
             GetComponent<AudioSource>().pitch = 1.5f;
         }
@@ -127,11 +137,38 @@ public class PlayerMove : MonoBehaviour
             {
                 Item item = nearObject.GetComponent<Item>();
                 int itemIndex = item.value;
-                hasitem[itemIndex] = true;
+                if (itemIndex == 4)
+                {
+                    hasitem[itemIndex] += 1600;
+                    if (hasitem[itemIndex] > 2000)
+                        hasitem[itemIndex] = 2000;
+                }
+
+                else
+                    hasitem[itemIndex] += 1;
 
                 Destroy(nearObject);
             }
         }
+    }
+    void use_item()
+    {
+        item1 = Input.GetButtonDown("equip1");
+        item2 = Input.GetButtonDown("equip2");
+        item3 = Input.GetButtonDown("equip3");
+        if (item1 && hasitem[2] > 0)
+        {
+            hasitem[2] -= 1; //몬스터 제자리
+        }
+        if (item2 && hasitem[3] > 0)
+        {
+            hasitem[3] -= 1; //몬스터 느려짐
+        }
+        if (item3 && hasitem[4] > 0)
+        {
+            hasitem[4] -= 1;
+        }
+
     }
     private void OnTriggerStay(Collider other) //충돌처리
     {
@@ -148,6 +185,6 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("충돌 감지");
+        //Debug.Log("충돌 감지");
     }
 }
