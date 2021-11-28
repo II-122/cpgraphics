@@ -42,14 +42,14 @@ public class MonsterAI : MonoBehaviour
     {
         float distance = Vector3.Distance(player.position, agent.transform.position);
         // run
-        if (60.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt == 0)
+        if (30.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt == 0)
         {
             playerInSight = true;
             agent.SetDestination(player.transform.position);
             agent.speed = 75;
             animator.SetTrigger("Run");
         }
-        else if(60.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt == 0)
+        else if(30.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt == 0)
         {
             playerInSight = false;
             GotoNextPoint();
@@ -57,7 +57,7 @@ public class MonsterAI : MonoBehaviour
             animator.SetTrigger("Run");
             item1_cnt--;
         }
-        else if (60.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt > 0)
+        else if (30.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt > 0)
         {
             playerInSight = true;
             agent.SetDestination(player.transform.position);
@@ -66,7 +66,7 @@ public class MonsterAI : MonoBehaviour
             item2_cnt--;
 
         }
-        else if (60.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt > 0)
+        else if (30.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt > 0)
         {
             playerInSight = false;
             GotoNextPoint();
@@ -76,7 +76,7 @@ public class MonsterAI : MonoBehaviour
             item2_cnt--;
         }
         // walk
-        else // if (distance <= 60.0f || distance > lookRadius)
+        else // if (distance <= 30.0f || distance > lookRadius)
         {
             playerInSight = false;
             GotoNextPoint();
