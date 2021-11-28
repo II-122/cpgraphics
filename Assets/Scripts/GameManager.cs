@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         int second = 59 - (int)playTime % 60;
         countTimeTxt.text = string.Format("{0:00}", min) + ":" + string.Format("{0:00}", second);
         KeyNum.text = player.hasitem[0] + " / 5";
-        HeartNum.text = "X " + player.hasitem[1];
+        HeartNum.text = "X " + player.hasitem[1];     
         SprayNum.text = "X" + player.hasitem[2];
         WebNum.text = "X" + player.hasitem[3];
 
