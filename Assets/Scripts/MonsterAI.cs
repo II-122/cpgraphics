@@ -24,6 +24,8 @@ public class MonsterAI : MonoBehaviour
     public Transform[] navPoints;
     public int idx;
 
+    public int item1_cnt;
+    public int item2_cnt;
 
     private void Start()
     {
@@ -32,24 +34,56 @@ public class MonsterAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         animator.SetTrigger("Walk");
+        item1_cnt = 0;
+        item2_cnt = 0;
     }
 
     private void Update()
     {
         float distance = Vector3.Distance(player.position, agent.transform.position);
         // run
-        if (60.0f < distance && distance <= detectDistance)
+        if (60.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt == 0)
         {
             playerInSight = true;
             agent.SetDestination(player.transform.position);
+            agent.speed = 75;
             animator.SetTrigger("Run");
+        }
+        else if(60.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt == 0)
+        {
+            playerInSight = false;
+            GotoNextPoint();
+            agent.speed = 75;
+            animator.SetTrigger("Run");
+            item1_cnt--;
+        }
+        else if (60.0f < distance && distance <= detectDistance && item1_cnt == 0 && item2_cnt > 0)
+        {
+            playerInSight = true;
+            agent.SetDestination(player.transform.position);
+            agent.speed = 20;
+            animator.SetTrigger("Run");
+            item2_cnt--;
+
+        }
+        else if (60.0f < distance && distance <= detectDistance && item1_cnt > 0 && item2_cnt > 0)
+        {
+            playerInSight = false;
+            GotoNextPoint();
+            agent.speed = 20;
+            animator.SetTrigger("Walk");
+            item1_cnt--;
+            item2_cnt--;
         }
         // walk
         else // if (distance <= 60.0f || distance > lookRadius)
         {
             playerInSight = false;
             GotoNextPoint();
+            agent.speed = 20;
             animator.SetTrigger("Walk");
+            if(item1_cnt>0) item1_cnt--;
+            if (item2_cnt > 0) item2_cnt--;
         }
     }
 

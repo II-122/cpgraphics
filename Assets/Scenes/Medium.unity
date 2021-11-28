@@ -35771,6 +35771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64fbe0d37de4114f801fa2cc993422a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster1: {fileID: 720548390}
+  monster2: {fileID: 1381154715}
   items: []
   hasitem: 0000000000000000000000000000000000000000
   walkSpeed: 55
