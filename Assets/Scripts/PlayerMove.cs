@@ -12,20 +12,20 @@ public class PlayerMove : MonoBehaviour
     private NavMeshAgent m2_agent;
 
 
-    public GameObject[] items; //갖고있는 아이템 리스트
+    public GameObject[] items; // 갖고있는 아이템 리스트
     public int[] hasitem;
     public float playTime;
 
     [SerializeField]
     private float walkSpeed;
-    public float sprintingMultiplier; //플레이어 이동 속도
+    public float sprintingMultiplier; // 플레이어 이동 속도
 
     [SerializeField]
-    private float lookSensitivity; //마우스 화면 전환 감도
+    private float lookSensitivity; // 마우스 화면 전환 감도
 
 
     [SerializeField]
-    private float cameraRotationLimit; //마우스 화면 전환 범위
+    private float cameraRotationLimit; // 마우스 화면 전환 범위
     private float currentCameraRotationX = 0;
 
 
@@ -61,18 +61,19 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    // 프레임마다 Update 실행
     void Update()
     {
-        Move();
-        CameraRotation();
-        CharacterRotation();
-        Interation();
-        use_item();
+        Move();     // player 오브젝트 이동
+        CameraRotation();   // player 카메라 시야 이동
+        CharacterRotation();    // player 오브젝트 방향 이동
+        Interation();   // 맵(미로)에 있는 아이템과 상호 작용
+        use_item();     // 보유한 아이템 사용
         playTime += Time.deltaTime;
 
     }
 
+    // 일정 주기마다 FixedUpdate 실행
     void FixedUpdate()
     {
         CollisionWall();
@@ -80,24 +81,28 @@ public class PlayerMove : MonoBehaviour
 
     private void CollisionWall()
     {
-        
+        // 캐릭터 시야 정방향 앞, 뒤, 왼쪽, 오른쪽 Border에
+        // "wall" mask를 가진 오브젝트와 player 간 충돌이 감지된 경우 반대 방향으로 backstapLength 만큼 player 좌표 이동
+        // 충돌이 감지되면 Bool 변수 값 = true
         isBorder_front = Physics.Raycast(transform.position, transform.forward, backstapLength, LayerMask.GetMask("wall"));
         isBorder_back = Physics.Raycast(transform.position, -transform.forward, backstapLength, LayerMask.GetMask("wall"));
         isBorder_left = Physics.Raycast(transform.position, -transform.right, backstapLength, LayerMask.GetMask("wall"));
         isBorder_right = Physics.Raycast(transform.position, transform.right, backstapLength, LayerMask.GetMask("wall"));
     }
-    //플레이어 이동 함수
+
+    // 플레이어 이동 함수
     private void Move()
     {
-        float _moveDirX = Input.GetAxisRaw("Horizontal");
-        float _moveDirZ = Input.GetAxisRaw("Vertical");
+        // 방향키 or wasd 입력으로 player 이동
+        float _moveDirX = Input.GetAxisRaw("Horizontal");   // 입력된 수평 방향 만큼 이동할 거리
+        float _moveDirZ = Input.GetAxisRaw("Vertical");     // 입력된 수직 방향 만큼 이동할 거리
 
-        Vector3 _moveHorizontal = transform.right * _moveDirX;
-        Vector3 _moveVertical = transform.forward * _moveDirZ;
+        Vector3 _moveHorizontal = transform.right * _moveDirX;  // ←, →, a, d
+        Vector3 _moveVertical = transform.forward * _moveDirZ;  // ↑, ↓, w, s
         rDown = Input.GetButton("Sprint");
         bool rUp = Input.GetButtonUp("Sprint");
 
-        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
+        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;   // 일정 속도의 이동 위해 이동 거리 방향 벡터 normalize
         if (_velocity != Vector3.zero)
         {
             GetComponent<AudioSource>().UnPause();
@@ -112,7 +117,7 @@ public class PlayerMove : MonoBehaviour
         {
             hasitem[4] -= 1;
             _velocity *= sprintingMultiplier;       // 왼쪽 Shift 누르면 달리기
-            GetComponent<AudioSource>().pitch = 1.5f;
+            GetComponent<AudioSource>().pitch = 1.5f; 
         }
 
         if (rUp)
@@ -122,20 +127,21 @@ public class PlayerMove : MonoBehaviour
 
         if ((!isBorder_front) && (!isBorder_back) && (!isBorder_left) && (!isBorder_right))
         {
+            // 플레이어 앞, 뒤, 양 옆 Border에 모두 충돌처리가 없는 경우
+            // 입력 받은 이동 거리 만큼 player 이동
             myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
-
         }
-        if (hasitem[0] == 5 && nearObject != null) //열쇠 5개 먹고 문에 다가갔을 때
+        if (hasitem[0] == 5 && nearObject != null) // 열쇠 5개 먹고 문에 다가갔을 때
         {
             if (nearObject.tag == "door")
             {
-                //Debug.Log("finish");
-                //이 부분에 성공 화면 넣어주시면 될 것 같아요
+                // Debug.Log("Finish!");
+                // 이 부분에 성공 화면 넣어주시면 될 것 같아요
             }
         }
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
-        if (m1_distance < 30f || m2_distance < 30f) //몬스터에게 잡혔을 때
+        if (m1_distance < 30f || m2_distance < 30f) // 몬스터에게 잡혔을 때
         {
             if (hasitem[1] > 0)
             {
@@ -145,26 +151,27 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Lose");
-                //이 부분에 실패 화면 넣어주시면 될 것 같아요}
+                // Debug.Log("GameOver!");
+                // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
             }
         }
         if (playTime > 300) // 플레이 시간이 5분 지났을 때
         {
-            //Debug.Log("Lose");
-            //이 부분에 실패 화면 넣어주시면 될 것 같아요}
+            // Debug.Log("GameOver!");
+            // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
         }
     }
-    private void CharacterRotation() //좌우 캐릭터 회전
+
+    private void CharacterRotation() // 좌우 캐릭터 회전
     {
-        float _yRotation = Input.GetAxisRaw("Mouse X");
+        float _yRotation = Input.GetAxisRaw("Mouse X");     // 마우스 수평 이동 만큼 시야(카메라) y rotate
         Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
         myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
     }
 
-    private void CameraRotation() //상하 카메라 회전
+    private void CameraRotation() // 상하 카메라 회전
     {
-        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _xRotation = Input.GetAxisRaw("Mouse Y");     // 마우스 수직 이동 만큼 시야(카메라) x rotate
         float _cameraRotationX = _xRotation * lookSensitivity;
         currentCameraRotationX -= _cameraRotationX;
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
@@ -175,11 +182,11 @@ public class PlayerMove : MonoBehaviour
     void Interation()
     {
         iDown = Input.GetButtonDown("Interation");
-        if (iDown && nearObject != null) //근처에 물체가 있고, interation키('z')를 누르면 아이템 획득
+        if (iDown && nearObject != null) // 근처에 물체가 있고, interation키('z')를 누르면 아이템 획득
         {
             //Debug.Log("interation");
 
-            if (nearObject.tag == "Item") //nearObject가 item일때 
+            if (nearObject.tag == "Item") // nearObject가 item일때 
             {
                 Item item = nearObject.GetComponent<Item>();
                 int itemIndex = item.value;
@@ -205,14 +212,14 @@ public class PlayerMove : MonoBehaviour
 
         if (item1 && hasitem[2] > 0)
         {
-            hasitem[2] -= 1; //몬스터 제자리
+            hasitem[2] -= 1; // 몬스터 제자리
             monster1.item1_cnt = 1000;
             monster2.item1_cnt = 1000;
 
         }
         if (item2 && hasitem[3] > 0)
         {
-            hasitem[3] -= 1; //몬스터 느려짐
+            hasitem[3] -= 1; // 몬스터 느려짐
             monster1.item2_cnt = 1000;
             monster2.item2_cnt = 1000;
         }
@@ -222,10 +229,10 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-    private void OnTriggerStay(Collider other) //충돌처리
+    private void OnTriggerStay(Collider other) // 충돌처리
     {
         if (other.tag == "Item")
-            nearObject = other.gameObject; //아이템과 충돌하면 nearObject 세팅
+            nearObject = other.gameObject; // 아이템과 충돌하면 nearObject 세팅
         else if(other.tag == "door")
             nearObject = other.gameObject;
 
@@ -239,6 +246,6 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("충돌 감지");
+        // Debug.Log("충돌 감지");
     }
 }
