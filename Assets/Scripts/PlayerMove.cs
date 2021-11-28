@@ -39,6 +39,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+
         hasitem[0] = 0;
         hasitem[1] = 0;
         hasitem[2] = 0;
@@ -47,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
     }
 
+    
 
     // Update is called once per frame
     void Update()
