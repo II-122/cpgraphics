@@ -59,6 +59,12 @@ public class Item : MonoBehaviour
                     item_location = new Vector3(loc_x, 20f, loc_z); //추후 random, 3f, random으로 변경 random값은 (0~9)*100 - 450 혹은 스폰지역을 정해두고 하자
                     transform.position = item_location;
                     break;
+                case 5:
+                    loc_x = -47f;
+                    loc_z = 470f;
+                    item_location = new Vector3(loc_x, 20f, loc_z); //추후 random, 3f, random으로 변경 random값은 (0~9)*100 - 450 혹은 스폰지역을 정해두고 하자
+                    transform.position = item_location;
+                    break;
             }
 
         }

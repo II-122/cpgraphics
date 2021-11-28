@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     private Camera theCamera;
 
     private Rigidbody myRigid;
-
+    private Transform myTransform;
     private float backstapLength = 3.0f;
 
     bool iDown;
@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
         hasitem[3] = 0;
         hasitem[4] = 1000;
         myRigid = GetComponent<Rigidbody>();
+        myTransform = GetComponent<Transform>();
     }
 
 
@@ -107,6 +108,14 @@ public class PlayerMove : MonoBehaviour
 
         if ((!isBorder_front)&&(!isBorder_back)&&(!isBorder_left)&&(!isBorder_right)) { myRigid.MovePosition(transform.position + _velocity * Time.deltaTime); }
 
+        if(hasitem[0] == 5 && nearObject != null)
+        {
+            if(nearObject.tag == "door")
+            {
+                //Debug.Log("finish");
+                //이 부분에 성공 화면 넣어주시면 될 것 같아요
+            }
+        }
     }
 
     private void CharacterRotation() //좌우 캐릭터 회전
@@ -174,6 +183,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.tag == "Item")
             nearObject = other.gameObject; //아이템과 충돌하면 nearObject 세팅
+        else if(other.tag == "door")
+            nearObject = other.gameObject;
 
     }
 
