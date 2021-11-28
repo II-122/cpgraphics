@@ -7,21 +7,21 @@ public class ModeMenu : MonoBehaviour
 {
     public void PlayEasy()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Easy");
     }
 
     public void PlayMedium()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Medium");
     }
 
     public void PlayHard()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Hard");
     }
 
     public void PlayHell()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Hell");
     }
 }

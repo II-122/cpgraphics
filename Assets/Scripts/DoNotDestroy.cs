@@ -19,7 +19,19 @@ public class DoNotDestroy : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "test")
+        if (currentScene.name == "Easy")
+        {
+            Destroy(gameObject);
+        }
+        if (currentScene.name == "Medium")
+        {
+            Destroy(gameObject);
+        }
+        if (currentScene.name == "Hard")
+        {
+            Destroy(gameObject);
+        }
+        if (currentScene.name == "Hell")
         {
             Destroy(gameObject);
         }

@@ -47,11 +47,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MouseOver\EasyDescription.cs" />
      <Compile Include="Assets\Scripts\MonsterAI.cs" />
-     <Compile Include="Assets\UI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\MouseOver\HellDescription.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
+     <Compile Include="Assets\Scripts\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\MouseOver\HardDescription.cs" />
+     <Compile Include="Assets\Scripts\MouseOver\MediumDescription.cs" />
      <Compile Include="Assets\item_asset\QuarterView 3D Action BE5\ReadMe\Scripts\ReadmeBE5.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
      <Compile Include="Assets\Scripts\ModeMenu.cs" />
