@@ -91,7 +91,7 @@ public class PlayerMove : MonoBehaviour
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
-  
+
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;
         rDown = Input.GetButton("Sprint");
@@ -115,19 +115,19 @@ public class PlayerMove : MonoBehaviour
             GetComponent<AudioSource>().pitch = 1.5f;
         }
 
-        if(rUp)
+        if (rUp)
         {
             GetComponent<AudioSource>().pitch = 1.0f;
         }
 
-        if ((!isBorder_front)&&(!isBorder_back)&&(!isBorder_left)&&(!isBorder_right)) 
+        if ((!isBorder_front) && (!isBorder_back) && (!isBorder_left) && (!isBorder_right))
         {
             myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
-        
+
         }
         if (hasitem[0] == 5 && nearObject != null) //열쇠 5개 먹고 문에 다가갔을 때
         {
-            if(nearObject.tag == "door")
+            if (nearObject.tag == "door")
             {
                 //Debug.Log("finish");
                 //이 부분에 성공 화면 넣어주시면 될 것 같아요
@@ -135,13 +135,26 @@ public class PlayerMove : MonoBehaviour
         }
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
-        if (m1_distance < 30f || m2_distance <30f || playTime>300) //몬스터에게 잡히거나 플레이 시간이 5분 지났을 때
+        if (m1_distance < 30f || m2_distance < 30f) //몬스터에게 잡혔을 때
+        {
+            if (hasitem[1] > 0)
+            {
+                hasitem[1]--;
+                transform.position = new Vector3(0f, 25f, -20f);
+                hasitem[4] = 1000;
+            }
+            else
+            {
+                //Debug.Log("Lose");
+                //이 부분에 실패 화면 넣어주시면 될 것 같아요}
+            }
+        }
+        if (playTime > 300) // 플레이 시간이 5분 지났을 때
         {
             //Debug.Log("Lose");
-            //이 부분에 실패 화면 넣어주시면 될 것 같아요
+            //이 부분에 실패 화면 넣어주시면 될 것 같아요}
         }
     }
-
     private void CharacterRotation() //좌우 캐릭터 회전
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");

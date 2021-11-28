@@ -11769,6 +11769,8 @@ MonoBehaviour:
   - {fileID: 458092371}
   - {fileID: 77484847}
   idx: 0
+  item1_cnt: 0
+  item2_cnt: 0
 --- !u!136 &720548391
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16170,7 +16172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3926889153904943866, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4410374569817733184, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: m_RootOrder
@@ -20300,7 +20302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3926889153904943866, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4410374569817733184, guid: 0386171fa4a03214996eb147dd53d515, type: 3}
       propertyPath: m_RootOrder
@@ -24532,6 +24534,8 @@ MonoBehaviour:
   - {fileID: 458092371}
   - {fileID: 77484847}
   idx: 0
+  item1_cnt: 0
+  item2_cnt: 0
 --- !u!95 &1381154716
 Animator:
   serializedVersion: 3
@@ -35775,6 +35779,7 @@ MonoBehaviour:
   monster2: {fileID: 1381154715}
   items: []
   hasitem: 0000000000000000000000000000000000000000
+  playTime: 0
   walkSpeed: 55
   sprintingMultiplier: 2
   lookSensitivity: 2
