@@ -151,7 +151,7 @@ public class PlayerMove : MonoBehaviour
                 transform.position = new Vector3(0f, 25f, -20f);
                 hasitem[4] = 1000;
             }
-            else
+            else if(SceneManager.GetActiveScene().name != "Medium")
             {
                 // Debug.Log("GameOver!");
                 // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
