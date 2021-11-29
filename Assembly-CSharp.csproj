@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\MouseOver\HellDescription.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\DoNotDestroy.cs" />
+     <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\MouseOver\HardDescription.cs" />
      <Compile Include="Assets\Scripts\MouseOver\MediumDescription.cs" />
