@@ -147,11 +147,9 @@ public class PlayerMove : MonoBehaviour
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
 
-<<<<<<< HEAD
+
         if (m1_distance < 25f || m2_distance < 25f) // 몬스터에게 잡혔을 때
-=======
-        if (m1_distance < 20f || m2_distance < 20f) // 몬스터에게 잡혔을 때
->>>>>>> 9e93b6bea0ac2053386a5ef1dad9665df433bf98
+
         {
             if (hasitem[1] > 0) //보유한 생명이 있으면
             {
