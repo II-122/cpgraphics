@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerMove : MonoBehaviour
@@ -137,6 +138,7 @@ public class PlayerMove : MonoBehaviour
             {
                 // Debug.Log("Finish!");
                 // 이 부분에 성공 화면 넣어주시면 될 것 같아요
+                SceneManager.LoadScene("Success");
             }
         }
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
@@ -153,12 +155,14 @@ public class PlayerMove : MonoBehaviour
             {
                 // Debug.Log("GameOver!");
                 // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
+                SceneManager.LoadScene("GameOver");
             }
         }
         if (playTime > 300) // 플레이 시간이 5분 지났을 때
         {
             // Debug.Log("GameOver!");
             // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
+            SceneManager.LoadScene("GameOver");
         }
     }
 
