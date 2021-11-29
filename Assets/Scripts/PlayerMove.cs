@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
+    //몬스터에게 아이템 사용했음을 알려주기 위해 몬스터를 가져옴
     public MonsterAI monster1;
     public MonsterAI monster2;
+    //몬스터의 위치를 알고 플레이어와의 거리를 계산하기 위해 각 몬스터의 agent.transform.position을 이용하기 위해 가져옴
     private NavMeshAgent m1_agent;
     private NavMeshAgent m2_agent;
 
@@ -43,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     bool item2;
     bool rDown;
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
-    GameObject nearObject;
+    GameObject nearObject; //아이템과 문이 근처에 있는지 파악하기 위한 nearObject
 
 
     private void Start()
@@ -52,10 +54,10 @@ public class PlayerMove : MonoBehaviour
         m2_agent = monster2.agent;
 
         //아이템 보유 개수 초기화
-        hasitem[0] = 0;
-        hasitem[1] = 0;
-        hasitem[2] = 0;
-        hasitem[3] = 0;
+        hasitem[0] = 0; //열쇠
+        hasitem[1] = 0; //생명
+        hasitem[2] = 0; //스프레이
+        hasitem[3] = 0; //거미줄
         hasitem[4] = 1000; //체력은 초기 1000/1000
         myRigid = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
