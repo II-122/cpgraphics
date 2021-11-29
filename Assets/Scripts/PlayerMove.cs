@@ -14,12 +14,12 @@ public class PlayerMove : MonoBehaviour
 
 
     public GameObject[] items; // 갖고있는 아이템 리스트
-    public int[] hasitem;
-    public float playTime;
+    public int[] hasitem; //각 아이템 보유 개수
+    public float playTime; //플레이한 시간
 
     [SerializeField]
-    private float walkSpeed;
-    public float sprintingMultiplier; // 플레이어 이동 속도
+    private float walkSpeed; //플레이어의 이동 속도
+    public float sprintingMultiplier; // 플레이어 달리기 할 때 얼마나 빨라질 지
 
     [SerializeField]
     private float lookSensitivity; // 마우스 화면 전환 감도
@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private float cameraRotationLimit; // 마우스 화면 전환 범위
-    private float currentCameraRotationX = 0;
+    private float currentCameraRotationX = 0; 
 
 
     [SerializeField]
@@ -37,10 +37,10 @@ public class PlayerMove : MonoBehaviour
     private Transform myTransform;
     private float backstapLength = 3.0f;
 
-    bool iDown;
+    bool iDown; //아이템 획득 키를 눌렀는지 (z)
+    //아이템 사용키를 눌렀는지(1,2)
     bool item1;
     bool item2;
-    bool item3;
     bool rDown;
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject;
@@ -51,11 +51,12 @@ public class PlayerMove : MonoBehaviour
         m1_agent = monster1.agent;
         m2_agent = monster2.agent;
 
+        //아이템 보유 개수 초기화
         hasitem[0] = 0;
         hasitem[1] = 0;
         hasitem[2] = 0;
         hasitem[3] = 0;
-        hasitem[4] = 1000;
+        hasitem[4] = 1000; //체력은 초기 1000/1000
         myRigid = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
 
@@ -70,7 +71,7 @@ public class PlayerMove : MonoBehaviour
         CharacterRotation();    // player 오브젝트 방향 이동
         Interation();   // 맵(미로)에 있는 아이템과 상호 작용
         use_item();     // 보유한 아이템 사용
-        playTime += Time.deltaTime;
+        playTime += Time.deltaTime; //플레이 시간 기록(제한시간 위해 사용)
 
     }
 
@@ -100,7 +101,7 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 _moveHorizontal = transform.right * _moveDirX;  // ←, →, a, d
         Vector3 _moveVertical = transform.forward * _moveDirZ;  // ↑, ↓, w, s
-        rDown = Input.GetButton("Sprint");
+        rDown = Input.GetButton("Sprint"); //왼쪽 shift키
         bool rUp = Input.GetButtonUp("Sprint");
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;   // 일정 속도의 이동 위해 이동 거리 방향 벡터 normalize
@@ -132,37 +133,32 @@ public class PlayerMove : MonoBehaviour
             // 입력 받은 이동 거리 만큼 player 이동
             myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
         }
-        if (hasitem[0] == 5 && nearObject != null) // 열쇠 5개 먹고 문에 다가갔을 때
+        if (hasitem[0] == 5 && nearObject != null) // 열쇠 5개 먹고 근처에 object가 있을 때
         {
-            if (nearObject.tag == "door")
+            if (nearObject.tag == "door") //근처 object가 문일 때
             {
-                // Debug.Log("Finish!");
-                // 이 부분에 성공 화면 넣어주시면 될 것 같아요
-                SceneManager.LoadScene("Success");
+                SceneManager.LoadScene("Success"); //성공 화면
             }
         }
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
+
         if (m1_distance < 30f || m2_distance < 30f) // 몬스터에게 잡혔을 때
         {
-            if (hasitem[1] > 0)
+            if (hasitem[1] > 0) //보유한 생명이 있으면
             {
-                hasitem[1]--;
-                transform.position = new Vector3(0f, 25f, -20f);
-                hasitem[4] = 1000;
+                hasitem[1]--; //생명하나 감소
+                transform.position = new Vector3(0f, 25f, -20f); //새로운 위치에서 리스폰
+                hasitem[4] = 1000; //리스폰시 체력 다시 채워줌
             }
-            else if(SceneManager.GetActiveScene().name != "Medium")
+            else if(SceneManager.GetActiveScene().name != "Medium") // 보유한 생명도 없고 medium난이도가 아니면
             {
-                // Debug.Log("GameOver!");
-                // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
-                SceneManager.LoadScene("GameOver");
+                SceneManager.LoadScene("GameOver"); //게임 오버 화면
             }
         }
         if (playTime > 300) // 플레이 시간이 5분 지났을 때
         {
-            // Debug.Log("GameOver!");
-            // 이 부분에 게임 오버 화면 넣어주시면 될 것 같아요}
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver"); //게임 오버 화면
         }
     }
 
@@ -194,17 +190,17 @@ public class PlayerMove : MonoBehaviour
             {
                 Item item = nearObject.GetComponent<Item>();
                 int itemIndex = item.value;
-                if (itemIndex == 4)
+                if (itemIndex == 4) //물약을 먹었을 때 체력 800을 회복시켜줌
                 {
                     hasitem[itemIndex] += 800;
-                    if (hasitem[itemIndex] > 1000)
+                    if (hasitem[itemIndex] > 1000) //만약 800 채웠을 때 1000을 넘기면 체력은 1000으로 고정
                         hasitem[itemIndex] = 1000;
                 }
 
-                else
-                    hasitem[itemIndex] += 1;
+                else //물약이 아닌 아이템을 먹었을 때
+                    hasitem[itemIndex] += 1; //보유 개수 1개 늘려줌
 
-                Destroy(nearObject);
+                Destroy(nearObject); //획득한 아이템은 필드에서 삭제
             }
         }
     }
@@ -212,24 +208,22 @@ public class PlayerMove : MonoBehaviour
     {
         item1 = Input.GetButtonDown("equip1");
         item2 = Input.GetButtonDown("equip2");
-        item3 = Input.GetButtonDown("equip3");
 
         if (item1 && hasitem[2] > 0)
         {
-            hasitem[2] -= 1; // 몬스터 제자리
-            monster1.item1_cnt = 1000;
-            monster2.item1_cnt = 1000;
+            hasitem[2] -= 1; // 몬스터 제자리에 돌도록
+            //몬스터에게 아이템1을 사용했다고 알려줌
+            monster1.item1_cnt = 1000; //아이템1의 지속 시간
+            monster2.item1_cnt = 1000; //아이템2의 지속 시간
 
         }
         if (item2 && hasitem[3] > 0)
         {
-            hasitem[3] -= 1; // 몬스터 느려짐
-            monster1.item2_cnt = 1000;
-            monster2.item2_cnt = 1000;
-        }
-        if (item3 && hasitem[4] > 0)
-        {
-            hasitem[4] -= 1;
+            hasitem[3] -= 1; // 몬스터 느려지게 하도록
+            
+            //몬스터에게 아이템2를 사용했다고 알려줌
+            monster1.item2_cnt = 1000; //아이템1의 지속 시간
+            monster2.item2_cnt = 1000; //아이템2의 지속 시간
         }
 
     }
@@ -238,18 +232,14 @@ public class PlayerMove : MonoBehaviour
         if (other.tag == "Item")
             nearObject = other.gameObject; // 아이템과 충돌하면 nearObject 세팅
         else if(other.tag == "door")
-            nearObject = other.gameObject;
+            nearObject = other.gameObject; //문과 충돌하면 nearObject를 세팅
 
     }
 
-    public void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other) //object과 충돌이 되지 않은 상태이면
     {
         if (other.tag == "Item")
-            nearObject = null;
+            nearObject = null; //nearobject를 없애줌
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        // Debug.Log("충돌 감지");
-    }
 }
