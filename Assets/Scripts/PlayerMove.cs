@@ -47,6 +47,8 @@ public class PlayerMove : MonoBehaviour
     bool isBorder_front, isBorder_back, isBorder_left, isBorder_right;
     GameObject nearObject; //아이템과 문이 근처에 있는지 파악하기 위한 nearObject
 
+    public Animator SceneTransition;        // 화면 전환 애니메이션
+
 
     private void Start()
     {
@@ -109,7 +111,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;   // 일정 속도의 이동 위해 이동 거리 방향 벡터 normalize
         if (_velocity != Vector3.zero)
         {
-            GetComponent<AudioSource>().UnPause();
+            GetComponent<AudioSource>().UnPause();      // 움직이기 시작하면 발자국 소리
         }
         else
         {
@@ -121,12 +123,12 @@ public class PlayerMove : MonoBehaviour
         {
             hasitem[4] -= 1;
             _velocity *= sprintingMultiplier;       // 왼쪽 Shift 누르면 달리기
-            GetComponent<AudioSource>().pitch = 1.5f; 
+            GetComponent<AudioSource>().pitch = 1.5f;  // 달릴 때 발자국 소리 빠르게
         }
 
         if (rUp)
         {
-            GetComponent<AudioSource>().pitch = 1.0f;
+            GetComponent<AudioSource>().pitch = 1.0f;   // 쉬프트 떼면 다시 원래 발자국 소리
         }
 
         if ((!isBorder_front) && (!isBorder_back) && (!isBorder_left) && (!isBorder_right))
@@ -139,13 +141,13 @@ public class PlayerMove : MonoBehaviour
         {
             if (nearObject.tag == "door") //근처 object가 문일 때
             {
-                SceneManager.LoadScene("Success"); //성공 화면
+                StartCoroutine("LoadSuccess"); //성공 화면
             }
         }
         float m1_distance = Vector3.Distance(transform.position, m1_agent.transform.position);
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
 
-        if (m1_distance < 30f || m2_distance < 30f) // 몬스터에게 잡혔을 때
+        if (m1_distance < 25f || m2_distance < 25f) // 몬스터에게 잡혔을 때
         {
             if (hasitem[1] > 0) //보유한 생명이 있으면
             {
@@ -155,12 +157,12 @@ public class PlayerMove : MonoBehaviour
             }
             else if(SceneManager.GetActiveScene().name != "Medium") // 보유한 생명도 없고 medium난이도가 아니면
             {
-                SceneManager.LoadScene("GameOver"); //게임 오버 화면
+                StartCoroutine("LoadGameOver"); //게임 오버 화면
             }
         }
         if (playTime > 300) // 플레이 시간이 5분 지났을 때
         {
-            SceneManager.LoadScene("GameOver"); //게임 오버 화면
+            StartCoroutine("LoadGameOver"); //게임 오버 화면
         }
     }
 
@@ -244,4 +246,21 @@ public class PlayerMove : MonoBehaviour
             nearObject = null; //nearobject를 없애줌
     }
 
+    IEnumerator LoadGameOver()                      // 애니메이션을 추가해서 게임 종료 장면 불러옴
+    {
+        SceneTransition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene("GameOver");
+    }
+
+    IEnumerator LoadSuccess()
+    {
+        SceneTransition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene("Success");
+    }
 }
