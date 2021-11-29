@@ -148,7 +148,7 @@ public class PlayerMove : MonoBehaviour
         float m2_distance = Vector3.Distance(transform.position, m2_agent.transform.position);
 
 
-        if (m1_distance < 25f || m2_distance < 25f) // 몬스터에게 잡혔을 때
+        if (m1_distance < 30f || m2_distance < 30f) // 몬스터에게 잡혔을 때
 
         {
             if (hasitem[1] > 0) //보유한 생명이 있으면
@@ -219,8 +219,8 @@ public class PlayerMove : MonoBehaviour
         {
             hasitem[2] -= 1; // 몬스터 제자리에 돌도록
             //몬스터에게 아이템1을 사용했다고 알려줌
-            monster1.item1_cnt = 1000; //아이템1의 지속 시간
-            monster2.item1_cnt = 1000; //아이템2의 지속 시간
+            monster1.item1_cnt = 3000; //아이템1의 지속 시간
+            monster2.item1_cnt = 3000; //아이템2의 지속 시간
 
         }
         if (item2 && hasitem[3] > 0)
@@ -228,8 +228,8 @@ public class PlayerMove : MonoBehaviour
             hasitem[3] -= 1; // 몬스터 느려지게 하도록
             
             //몬스터에게 아이템2를 사용했다고 알려줌
-            monster1.item2_cnt = 1000; //아이템1의 지속 시간
-            monster2.item2_cnt = 1000; //아이템2의 지속 시간
+            monster1.item2_cnt = 3000; //아이템1의 지속 시간
+            monster2.item2_cnt = 3000; //아이템2의 지속 시간
         }
 
     }
